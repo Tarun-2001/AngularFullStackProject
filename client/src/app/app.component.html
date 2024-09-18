@@ -1,0 +1,76 @@
+<div class="student-container">
+  <h1 class="student-header">STUDENT DATA</h1>
+  <div class="student-data">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Email</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Contact</th>
+          <th scope="col">
+            <input type="textbox" style="border-radius: 12px" [(ngModel)] = "searchName"/>
+            <button  class="options btn btn-warning" (click)="searchStudent(searchName)">Search</button>
+            <button  class="options btn btn-success"data-bs-toggle="modal" data-bs-target="#studentModel" (click)="openForm()">Add Student</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let student of student; index as i"
+        >
+          <th>{{i+1}}</th>
+          <td>{{ student.FirstName }}</td>
+          <td>{{ student.LastName }}</td>
+          <td>{{ student.Email }}</td>
+          <td>{{ student.Gender }}</td>
+          <td>{{ student.Contact }}</td>
+          <td>
+            <button class="options btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModel" (click)="openForm(student)">Edit</button>
+            <button class="options btn btn-danger" (click)="deleteForm(student._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" id="studentModel" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="studentModalLabel">Enter Student Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="InputFName">First Name</label>
+            <input type="text" class="form-control" id="InputFName" name = "fname" [(ngModel)] = "firstName" >
+          </div>
+          <div class="form-group">
+            <label for="InputLName">Last Name</label>
+            <input type="text" class="form-control"name = "lname" id="InpuLName" [(ngModel)] = "lastName">
+          </div>
+          <div class="form-group">
+            <label for="InputEmail">Email</label>
+            <input type="email" class="form-control" name = "email"id="InputEmail" [(ngModel)] = "email">
+          </div>
+          <div class="form-group">
+            <label for="InputGender">Gender</label>
+            <input type="text" class="form-control" name = "gender"id="InputGender" [(ngModel)] = "gender">
+          </div>
+          <div class="form-group">
+            <label for="InputContact">Contact</label>
+            <input type="text" class="form-control"name = "contact" id="InputContact" [(ngModel)] = "contact">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveForm()">Save</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
